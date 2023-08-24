@@ -1,13 +1,21 @@
-1) First of all create Laravel project with bellow command in the terminal:
+# laravel-datatabale-server-side-pagination
+Implement Server Side Pagination to Laravel Application
 
-composer create-project laravel/laravel laravel_server_side_pagination
+Step 1: Create Laravel project with below command in the terminal
 
-2) Now let's create database migration using belllow artisan command:
+```bash
+  composer create-project laravel/laravel laravel_server_side_pagination
+```
 
-php artisan make:migration create_blog_table
+Step 2: Now let's create database migration using below artisan command:
 
-3) Now add table fields in the migration class in the up() method.
+```bash
+  php artisan make:migration create_blog_table
+```
 
+Step 3: Now add table fields in the migration class in the up() method.
+
+```php
 Schema::create('blog', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
@@ -18,28 +26,44 @@ Schema::create('blog', function (Blueprint $table) {
             $table->text('content');
             $table->timestamps();
         });
+```
 
-4) Run the migrate command to generate table in the database:
+Step 4: Run the migrate command to generate table in the database:
 
-php artisan migrate
+```bash
+  php artisan migrate
+```
 
-5) create model using following command:
+Step 5: create model using following command:
 
-php artisan make:model Blog
+```bash
+  php artisan make:model Blog
+```
 
-6) Generating Factory class
+Step 6: Generating Factory class
 
-php artisan make:factory BlogFactory --model=Blog
-
+```bash
+  php artisan make:factory BlogFactory --model=Blog
+```
 It will generate factory class at database/factories/BlogFactory.php file.
 
-7) Open 'BlogFactory' file
 
-Add Trait: use App\Models\Blog;
+Step 7: Open 'BlogFactory' file
+
+```bash
+  php artisan make:factory BlogFactory --model=Blog
+```
+
+Add Trait:
+
+```php
+use App\Models\Blog;
+```
 
 Add following code in the definition() method.
 
-return [
+```php
+    return [
             'title' => $this->faker->text,
             'user_id' => rand(1,200),
             'slug' => $this->faker->slug,
@@ -47,16 +71,25 @@ return [
             'description' => $this->faker->text,
             'content' => $this->faker->paragraph,
         ];
+```
 
-8) Generate dummy data in the database tables.
+Step 8: Generate dummy data in the database tables
 
 Now open database/seeds/DatabaseSeeder.php file and add the bellow lines in the run() function.
 
-\App\Models\User::factory(50)->create();
-\App\Models\Blog::factory(200)->create();
+```bash
+  \App\Models\User::factory(50)->create();
+  \App\Models\Blog::factory(200)->create();
+```
 
-9) Clear the cache
+Step 9: Clear the cache
+
+```bash
 php artisan optimize:clear
+```
 
-10) Run the application:
+Step 10: Run the application
+
+```bash
 php artisan serve
+```
